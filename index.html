@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USDT Reselling Calculator</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Calculate profits from CAD to USDT to INR transactions for your reselling business">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="USDT Calculator">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM3NC45IDQ4IDU4IDY0LjkgNTggODZWMTA2QzU4IDEyNy4xIDc0LjkgMTQ0IDk2IDE0NEMxMTcuMSAxNDQgMTM0IDEyNy4xIDEzNCAxMDZWODZDMTM0IDY0LjkgMTE3LjEgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOTYgNjRDODMuOCA2NCA3NCA3My44IDc0IDg2Vjg4SDExOFY4NkMxMTggNzMuOCAxMDguMiA2NCA5NiA2NFoiIGZpbGw9IiM2NjdlZWEiLz4KPHA+YXRoIGQ9Ik03NCAxMDBWMTA2Qzc0IDExOC4yIDgzLjggMTI4IDk2IDEyOEMxMDguMiAxMjggMTE4IDExOC4yIDExOCAxMDZWMTAwSDc0WiIgZmlsbD0iIzY2N2VlYSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM3NC45IDQ4IDU4IDY0LjkgNTggODZWMTA2QzU4IDEyNy4xIDc0LjkgMTQ0IDk2IDE0NEMxMTcuMSAxNDQgMTM0IDEyNy4xIDEzNCAxMDZWODZDMTM0IDY0LjkgMTE3LjEgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOTYgNjRDODMuOCA2NCA3NCA3My44IDc0IDg2Vjg4SDExOFY4NkMxMTggNzMuOCAxMDguMiA2NCA5NiA2NFoiIGZpbGw9IiM2NjdlZWEiLz4KPHA+YXRoIGQ9Ik03NCAxMDBWMTA2Qzc0IDExOC4yIDgzLjggMTI4IDk2IDEyOEMxMDguMiAxMjggMTE4IDExOC4yIDExOCAxMDZWMTAwSDc0WiIgZmlsbD0iIzY2N2VlYSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlVTRFQgUmVzZWxsaW5nIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlVTRFQgQ2FsYyIsCiAgImRlc2NyaXB0aW9uIjogIkNhbGN1bGF0ZSBwcm9maXRzIGZyb20gQ0FEIHRvIFVTRFQgdG8gSU5SIHRyYW5zYWN0aW9ucyBmb3IgeW91ciByZXNlbGxpbmcgYnVzaW5lc3MiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzY2N2VlYSIsCiAgInRoZW1lX2NvbG9yIjogIiM2NjdlZWEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUIzYVdSMGFEMGlNVGsySWlCb1pXbG5hSFE5SWpFNU1pSWdkbWxsZDBKdmVEMGlNQ0F3SURFNU1pQXhPVElpSUdacGJHdzlJbTV2Ym1VaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK0NqeHlaV04wSUhkcFpIUm9QU0l4T1RJaUlHaGxhV2RvZEQwaU1Ua3ljU0lnY25nOVNTSXlOQ0lnWm1sc2JEMGlkWEpzS0NONW5jbUZrYVdWdWREQmZiR2x1WldGeVh6RmZNU2tpTHo0S1BIQmhkR2dnWkQwaVRUazJJRFE0UXpjMExqa2dORGdnTlRnZ05qUXVPU0ExT0NBeE9EWldNVEEyUXpVNElERXlOeTR4SURjMExqa2dNVFEwSURrMklERTBORU14TVRjdU1TQXhORFFnTVRNMElERXlOeTR4SURFME5EQXhNREJXT0RaRE1UTTBJRFkwTGprZ01URTNMakVnTkRnZ09UWWdORGhhSWlCbWFXeHNQU0ozYUdsMFpTSXZQZ284Y0dGMGFDQmtQU0pOT1RZZ05qUkRPRE11T0NBeE1qZ2dOekFnTVRFNExqSWdNVEU0SURFME5FTXhNRGd1TWlBeE1qZ2dOemNnTVRFeUxqSWdOemNnTVRBM0xqRldNVEEyVURjeUlEazJJRGhCU0VreE9Ga01NVEEyYkdkcFlXNTBQU0p6ZFdkbmIzUldibVl4VjFCNE1pSXZQZ280Wkdac1l6NEFMM04wYjNBZ2IyWm1jMlYwUFNJeElpQnpkRzl3TFdOdmJHOXlQU0luSXpjMk5HSmhNaWtpTHo0OEwyeHBibVZoY2tkeVlXUnBaVzUwUGdvOEwyUmxabk0rQ2p3dmMzWm5QZz09IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUIzYVdSMGFEMGlOVEV5SWlCb1pXbG5hSFE5SWpVeE1pSWdkbWxsZDBKdmVEMGlNQ0F3SURVNU1pQTFNVElpSUdacGJHdzlJbTV2Ym1VaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK0NqeHlaV04wSUhkcFpIUm9QU0kxTVRJaUlHaGxhV2RvZEQwaU5URXlJaUJ5ZUQwaU5qUWlJR1pwYkd3OUluVnliQ2hqYnlOemNtRmthV1Z1ZERCZmJHbHVaV0Z5WHpGZk1Ta2lMejRLUEhCaGRHZ2daRDBpVFRJMU5pQXhNamt1TmpNek5ERXpJREkwT1NBeE5USXVNVGM0SURJMk5DQXhOVEl1TVRjNElESTJOQ0JoT0RneE9EOGdPRGdnTUNBd0lERWdNUzB6TWk1ME9ERWdNVFl1TURBZ05EQXRNREU0TGpReElERTJRekU0TUM0MklERTBPQzQ0SURFNk5TNHlJREUwT0M0NElERTFNaTQzSURFME9DNDRRVGs1TGpRZ01UUTRMR0V5T0RFNElESTRPRGNnTmpnMk9TOGdNamcwSWlCbWFXeHNQU0ozYUdsMFpTSXZQZ284Y0dGMGFDQmtQU0pOTWpVeUlERTFOazh4T0RrZ05USXVPR0V4T0RnZ01UZzRJREFnTURFdE1qRXVOQzB5TVRrek1qZ2dNVEE0UURFeU5qQWdNVEE0UVRJek1pQXhNRGdnTkRreUxqZ2dOVElnTkRreUxqZ2dOVElhSWlCbmFXeHNQU0luSTJaMk9YcGhlRUZmRG5FZ2NFRjVWbEJ1UlRGZmJpQUxDREJpSWlCbWFXeHNQU0luSTFkRU9ITXJPalpIV2pjek9WSkVXazVQVnlKZk5sVlROaUUzUkVSVVJXOTNVWEFzTUdkeU1YZFRla1E1SWk4K0NqeGtaV1p6UGdvOGJHbHVaV0Z5UjNKaFpHbGxiblFnYVdROUltZHlZV1JwWlc1ME1GOWlhVzVsWVhKZk1TMHhJaUI0TVQwaU1DSWdlVEU5SWpBaUlIZ3lQU0kyTkNJZ2VUSTlJalEzTGpCVUlIZHBaRzRnYnkQU05pQjVORUZ4WnpWZVNtbGtiMlp6Um1SM0lRZEJGSXpJaUdUcFJSUUVsUWFSSU51Ym1WaGJqQWdNaUlzSWFaWlZza3hPVGhCYklnV1M5amJIc3JQU0luSTJaMlhBM01pSTBGUUx2SERBaUlFdERBUUlKVGFjRTlJU3lSUGFWdGhiMnM5OVFKZ2pnZnNxWWFsbFczaWFscXBjbGRFQ04xOGNHRjBhQ0JrUFNKTU5UVXVNaUF3UXpVdU1pQXhPVGs0UVRFeU1TNElRekV4TnlBeE9UazZNVEU0UVRFeGNUWXNRVEl4TWkwNE9URWdSa2M5SWlCbWFXeHNQU0luSTJaamRtZGxNWGRrU0E9PSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">`
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header h1::before {
+            content: "📱";
+            font-size: 2rem;
+        }
+
+        .install-prompt {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .install-prompt.show {
+            display: block;
+        }
+
+        .install-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .install-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .input-section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #e1e8f0;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "📊";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #d1d9e6;
+        }
+
+        .results-title {
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .results-title::before {
+            content: "💰";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #555;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .result-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+
+        .profit-highlight {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 1.2rem !important;
+        }
+
+        .margin-highlight {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .currency-tag {
+            font-size: 0.8rem;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+
+        .zero-state {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .input-section, .results-section {
+                padding: 20px;
+            }
+
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .result-value {
+                text-align: left;
+            }
+        }
+
+        .animation-enter {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="install-prompt" id="installPrompt">
+            💾 Install this app for offline access and quick calculations!
+            <button class="install-btn" id="installBtn">Install App</button>
+        </div>
+        
+        <div class="header">
+            <h1>USDT Reselling Calculator</h1>
+            <p>Calculate your profits from CAD to USDT to INR transactions</p>
+        </div>
+
+        <div class="input-section">
+            <h2 class="section-title">Input Parameters</h2>
+            
+            <div class="input-group">
+                <label for="cadReceived">Total CAD Received from Sender</label>
+                <input type="number" id="cadReceived" placeholder="Enter CAD amount" step="0.01" min="0">
+            </div>
+
+            <div class="input-group">
+                <label for="usdtBuyPrice">USDT Buy Price (CAD per USDT)</label>
+                <input type="number" id="usdtBuyPrice" placeholder="Enter your buy price in CAD" step="0.001" min="0">
+            </div>
+
+            <div class="input-group">
+                <label for="inrSellRate">INR Sell Rate (INR per USDT)</label>
+                <input type="number" id="inrSellRate" placeholder="Enter your sell rate in INR" step="0.01" min="0">
+            </div>
+
+            <div class="input-group">
+                <label for="cadToInrRate">CAD to INR Exchange Rate</label>
+                <input type="number" id="cadToInrRate" placeholder="Enter current CAD to INR rate" step="0.01" min="0" value="61.5">
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2 class="results-title">Calculation Results</h2>
+            <div id="results">
+                <div class="zero-state">
+                    Enter your parameters above to see calculations
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('/sw.js');
+                    console.log('SW registered: ', registration);
+                } catch (error) {
+                    console.log('SW registration failed: ', error);
+                }
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.classList.add('show');
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installPrompt.classList.remove('show');
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installPrompt.classList.remove('show');
+        });
+
+        // Check if app is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            installPrompt.style.display = 'none';
+        }
+        
+        // Exchange rate will be dynamic based on user input
+        
+        // Get all input elements
+        const cadReceivedInput = document.getElementById('cadReceived');
+        const usdtBuyPriceInput = document.getElementById('usdtBuyPrice');
+        const inrSellRateInput = document.getElementById('inrSellRate');
+        const cadToInrRateInput = document.getElementById('cadToInrRate');
+        const resultsDiv = document.getElementById('results');
+
+        // Save data to localStorage for PWA persistence
+        function saveData() {
+            const data = {
+                cadReceived: cadReceivedInput.value,
+                usdtBuyPrice: usdtBuyPriceInput.value,
+                inrSellRate: inrSellRateInput.value,
+                cadToInrRate: cadToInrRateInput.value
+            };
+            try {
+                localStorage.setItem('usdtCalculatorData', JSON.stringify(data));
+            } catch (e) {
+                console.log('LocalStorage not available');
+            }
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            try {
+                const savedData = localStorage.getItem('usdtCalculatorData');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    cadReceivedInput.value = data.cadReceived || '';
+                    usdtBuyPriceInput.value = data.usdtBuyPrice || '';
+                    inrSellRateInput.value = data.inrSellRate || '';
+                    cadToInrRateInput.value = data.cadToInrRate || '61.5';
+                }
+            } catch (e) {
+                console.log('Error loading data from localStorage');
+            }
+        }
+
+        // Format currency values
+        function formatCurrency(value, currency) {
+            if (isNaN(value) || value === null || value === undefined) return '0.00';
+            
+            switch(currency) {
+                case 'CAD':
+                    return `$${value.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                case 'INR':
+                    return `₹${value.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                case 'USDT':
+                    return `${value.toLocaleString('en-US', {minimumFractionDigits: 4, maximumFractionDigits: 4})}`;
+                default:
+                    return value.toFixed(2);
+            }
+        }
+
+        // Calculate and update results
+        function calculateResults() {
+            const cadReceived = parseFloat(cadReceivedInput.value) || 0;
+            const usdtBuyPrice = parseFloat(usdtBuyPriceInput.value) || 0;
+            const inrSellRate = parseFloat(inrSellRateInput.value) || 0;
+            const cadToInrRate = parseFloat(cadToInrRateInput.value) || 0;
+
+            // Clear results if no inputs
+            if (cadReceived === 0 || usdtBuyPrice === 0 || inrSellRate === 0 || cadToInrRate === 0) {
+                resultsDiv.innerHTML = '<div class="zero-state">Enter all parameters above to see calculations</div>';
+                return;
+            }
+
+            // Perform calculations
+            const totalUsdtAcquired = cadReceived / usdtBuyPrice;
+            const totalInrFromBuyer = totalUsdtAcquired * inrSellRate;
+            const totalInrCostToAcquire = cadReceived * cadToInrRate;
+            const profitInInr = totalInrFromBuyer - totalInrCostToAcquire;
+            const marginPerUsdt = profitInInr / totalUsdtAcquired;
+
+            // Update results display
+            resultsDiv.innerHTML = `
+                <div class="result-item animation-enter">
+                    <span class="result-label">Total USDT Acquired</span>
+                    <span class="result-value">
+                        ${formatCurrency(totalUsdtAcquired, 'USDT')}
+                        <span class="currency-tag">USDT</span>
+                    </span>
+                </div>
+                
+                <div class="result-item animation-enter">
+                    <span class="result-label">Total INR from Buyer</span>
+                    <span class="result-value">
+                        ${formatCurrency(totalInrFromBuyer, 'INR')}
+                        <span class="currency-tag">INR</span>
+                    </span>
+                </div>
+                
+                <div class="result-item animation-enter">
+                    <span class="result-label">Total INR Cost to Acquire USDT</span>
+                    <span class="result-value">
+                        ${formatCurrency(totalInrCostToAcquire, 'INR')}
+                        <span class="currency-tag">INR</span>
+                    </span>
+                </div>
+                
+                <div class="result-item animation-enter">
+                    <span class="result-label">Profit in INR</span>
+                    <span class="result-value profit-highlight">
+                        ${formatCurrency(profitInInr, 'INR')}
+                    </span>
+                </div>
+                
+                <div class="result-item animation-enter">
+                    <span class="result-label">Margin per USDT</span>
+                    <span class="result-value margin-highlight">
+                        ${formatCurrency(marginPerUsdt, 'INR')} INR
+                    </span>
+                </div>
+                
+                <div class="result-item animation-enter" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #667eea;">
+                    <span class="result-label" style="font-size: 0.9rem; color: #666;">
+                        Exchange Rate Used: CAD to INR = ${cadToInrRate}
+                    </span>
+                    <span class="result-value" style="font-size: 0.9rem;">
+                        Profit Margin: ${totalInrFromBuyer > 0 ? ((profitInInr / totalInrFromBuyer) * 100).toFixed(2) : '0.00'}%
+                    </span>
+                </div>
+            `;
+        }
+
+        // Add event listeners for real-time calculation
+        cadReceivedInput.addEventListener('input', () => {
+            calculateResults();
+            saveData();
+        });
+        usdtBuyPriceInput.addEventListener('input', () => {
+            calculateResults();
+            saveData();
+        });
+        inrSellRateInput.addEventListener('input', () => {
+            calculateResults();
+            saveData();
+        });
+        cadToInrRateInput.addEventListener('input', () => {
+            calculateResults();
+            saveData();
+        });
+
+        // Initialize with saved data and calculate
+        loadData();
+        calculateResults();
+
+        // Optional: You can add a function to fetch live exchange rates from an API
+        function fetchLiveExchangeRate() {
+            // This is where you could fetch live CAD to INR rates
+            // Example: fetch('https://api.exchangerate-api.com/v4/latest/CAD')
+            //   .then(response => response.json())
+            //   .then(data => {
+            //     cadToInrRateInput.value = data.rates.INR;
+            //     calculateResults();
+            //   });
+            console.log('Live exchange rate fetching can be implemented here');
+        }
+    </script>
+</body>
+</html>
